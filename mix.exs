@@ -7,7 +7,23 @@ defmodule ExWebexteams.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+
+      docs: [
+        main: "ExWebexteams",
+        extras: ["README.md"]
+      ],
+      
+      deps: deps(),
+      description: description(),
+      package: package(),
+      source_url: "https://github.com/zpeters/ex_webexteams"
     ]
   end
 
@@ -18,12 +34,26 @@ defmodule ExWebexteams.MixProject do
     ]
   end
 
+  defp description() do
+    "Webex Teams library for Elixir."
+  end
+
+  defp package() do
+    [
+      licenses: ["GPL v3.0"],
+      links: %{"GitHub" => "https://github.com/zpeters/ex_webexteams"}
+    ]
+  end
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:ex_rated, "~> 1.3.2"},
       {:poison, "~> 4.0.1"},
-      {:httpoison, "~> 1.3.1"}
+      {:httpoison, "~> 1.3.1"},
+      {:excoveralls, "~> 0.10.1", only: :test},
+      {:credo, "~> 0.10.2", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.19.1", only: :dev, runtime: false}
     ]
   end
 end

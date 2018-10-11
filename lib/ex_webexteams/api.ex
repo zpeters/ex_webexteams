@@ -1,8 +1,6 @@
 defmodule ExWebexteams.Api do
   @moduledoc """
   Interface to Webex Teams API through a rate limiter
-
-  Rate limit configurable in `configs/`
   """
 
   ### settings
