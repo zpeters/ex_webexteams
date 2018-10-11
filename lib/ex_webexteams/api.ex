@@ -6,9 +6,9 @@ defmodule ExWebexteams.Api do
   """
 
   ### settings
-  @bucket Application.get_env(:ex_webexteams, :limit_bucket)
-  @scale Application.get_env(:ex_webexteams, :limit_scale)
-  @limit Application.get_env(:ex_webexteams, :limit_limit)
+  @bucket Application.get_env(:ex_webexteams, :limit_bucket, "webexteams-rate-limit")
+  @scale Application.get_env(:ex_webexteams, :limit_scale, 10_000)
+  @limit Application.get_env(:ex_webexteams, :limit_limit, 5)
 
   @doc """
   Send a message to a team room
