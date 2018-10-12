@@ -1,6 +1,8 @@
 # ExWebexteams
 
-**TODO: Add description**
+This is currently a *use at your own risk* package.  The intended functionality works well in my limited test case (posting messages to a room) but has not been robustly tested.
+
+Currently we are only exposing get, post and one "helper" type function (post_message).  Much more functionality needs to be added to make this generally useful.
 
 ## Installation
 

@@ -23,6 +23,7 @@ defmodule ExWebexteams.MixProject do
       deps: deps(),
       description: description(),
       package: package(),
+      homepage_url: "https://github.com/zpeters/ex_webexteams",
       source_url: "https://github.com/zpeters/ex_webexteams"
     ]
   end
@@ -41,7 +42,10 @@ defmodule ExWebexteams.MixProject do
   defp package() do
     [
       licenses: ["GPL v3.0"],
-      links: %{"GitHub" => "https://github.com/zpeters/ex_webexteams"}
+      links: %{
+        "GitHub" => "https://github.com/zpeters/ex_webexteams",
+        "Webex Teams API" => "https://developer.webex.com/"
+      }
     ]
   end
 

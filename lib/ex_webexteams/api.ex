@@ -16,8 +16,12 @@ defmodule ExWebexteams.Api do
     post("/messages", json)
   end
 
-  ### Internal
-  defp get(path) do
+  @doc """
+  Get a resource (see webex api documentation)
+
+  Example `get("/rooms")`
+  """
+  def get(path) do
     ratelimit()
     url = generate_url(path)
     headers = generate_headers()
@@ -26,7 +30,12 @@ defmodule ExWebexteams.Api do
     response.body
   end
 
-  defp post(path, body) do
+  @doc """
+  Post a resource (see webex api documentation)
+
+  Example `post("/messages", json")`
+  """
+  def post(path, body) do
     ratelimit()
     url = generate_url(path)
     headers = generate_headers()
@@ -35,6 +44,7 @@ defmodule ExWebexteams.Api do
     response.body
   end
 
+  ### Internal
   defp ratelimit() do
     case ExRated.check_rate(@bucket, @scale, @limit) do
       {:ok, _} ->
