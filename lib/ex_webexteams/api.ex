@@ -13,7 +13,6 @@ defmodule ExWebexteams.Api do
 
   Example `get("/rooms")`
   """
-  # TODO create a spec for this
   def get(path) do
     ratelimit()
     url = generate_url(path)

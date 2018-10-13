@@ -56,6 +56,7 @@ defmodule ExWebexteams.MixProject do
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.3.1"},
       {:excoveralls, "~> 0.10.1", only: :test},
+      {:elixir_mock, "~> 0.2.8", only: :test},
       {:credo, "~> 0.10.2", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.19.1", only: :dev, runtime: false}
     ]

@@ -1,42 +1,11 @@
 defmodule ExWebexteams.Api.Shortcuts do
-  # TODO handle pagination
   @moduledoc """
   Shortcuts to API calls
   """
 
   import ExWebexteams.Api
 
-  ### Getting Messages
-  @doc"""
-  Get messages to 'me' from a roomId
-
-  opts:
-  `before` (string) - List messages before ISO8061 date
-  `beforeMessage` (string) - List messages sent before messaeg ID
-  `max` (integer) - maximum results
-  """
-  def get_room_messages(roomId, opts \\ []) do
-    "/messages?roomId=#{roomId}&mentionedPeople=me"
-    |> opts_handler(opts)
-  end
-
-  defp opts_handler(opts) do
-    keys = Keyword. keys(opts)
-    keys
-    |> Enum.map(&("#{Atom.to_string(&1)}=#{Keyword.get(opts, &1)}&"))
-    |> Enum.join
-    |> String.slice(0..-2)
-  end
-
-  defp opts_handler(prefix, opts) do
-    suffix = opts_handler(opts)
-    Enum.join([prefix, suffix], "&")
-  end
-
   ### Sending Messages
-  # TODO add def spec
-  # TODO add example pipelines to module doc
-
   def send_message(text, markdown \\ nil) do
     if markdown do
       Map.new([{"markdown", markdown}, {"text", text}])
@@ -65,9 +34,9 @@ defmodule ExWebexteams.Api.Shortcuts do
     Map.put(msg, "roomId", id)
   end
 
-  def post_message(msg) do
+  def post_message(msg, api \\ ExWebexteams.Api) do
     Poison.encode!(msg)
-    |> post("/messages")
+    |> api.post("/messages")
   end
 
 end
