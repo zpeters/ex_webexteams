@@ -2,9 +2,6 @@ defmodule ExWebexteams.Api.Shortcuts do
   @moduledoc """
   Shortcuts to API calls
   """
-
-  import ExWebexteams.Api
-
   ### Sending Messages
   def send_message(text, markdown \\ nil) do
     if markdown do
