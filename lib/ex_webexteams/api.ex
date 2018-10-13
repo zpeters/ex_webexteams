@@ -40,7 +40,6 @@ defmodule ExWebexteams.Api do
 
   Example `post("/messages", json")`
   """
-  # TODO create a spec for this
   def post(body, path) do
     ratelimit()
     url = generate_url(path)

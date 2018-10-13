@@ -45,7 +45,7 @@ defmodule ExWebexteamsShortcutsTest do
 
   test "to person id" do
     msg = Map.new()
-    id = 12345
+    id = 12_345
     expected = %{"toPersonId" => id}
     result = to_person_id(msg, id)
     assert expected == result
@@ -53,7 +53,7 @@ defmodule ExWebexteamsShortcutsTest do
 
   test "to room id" do
     msg = Map.new()
-    id = 12345
+    id = 12_345
     expected = %{"roomId" => id}
     result = to_room_id(msg, id)
     assert expected == result

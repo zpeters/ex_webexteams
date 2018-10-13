@@ -35,8 +35,8 @@ defmodule ExWebexteams.Api.Shortcuts do
   end
 
   def post_message(msg, api \\ ExWebexteams.Api) do
-    Poison.encode!(msg)
-    |> api.post("/messages")
+    json = Poison.encode!(msg)
+    json |> api.post("/messages")
   end
 
 end
