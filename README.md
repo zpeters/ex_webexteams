@@ -1,8 +1,14 @@
 # ExWebexteams
+[![Build Status](https://travis-ci.org/zpeters/ex_webexteams.svg?branch=master)](https://travis-ci.org/zpeters/ex_webexteams)
+[![Coverage Status](https://coveralls.io/repos/github/zpeters/ex_webexteams/badge.svg)](https://coveralls.io/github/zpeters/ex_webexteams)
 
 This is currently a *use at your own risk* package.  The intended functionality works well in my limited test case (posting messages to a room) but has not been robustly tested.
 
 Currently we are only exposing get, post and one "helper" type function (post_message).  Much more functionality needs to be added to make this generally useful.
+
+## Require Configuration
+
+TBD
 
 ## Installation
 
