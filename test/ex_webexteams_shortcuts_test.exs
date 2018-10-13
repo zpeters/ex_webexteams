@@ -55,7 +55,7 @@ defmodule ExWebexteamsShortcutsTest do
     msg = Map.new()
     id = 12_345
     expected = %{"roomId" => id}
-    result = to_room_id(msg, id)
+    result = by_room_id(msg, id)
     assert expected == result
   end
 
@@ -72,9 +72,17 @@ defmodule ExWebexteamsShortcutsTest do
     assert result == expected
   end
 
+  test "get my last message" do
+    room = 12345
+    expected = %{"max" => 1, "mentionedPeople" => "me", "roomId" => room}
+    result =
+      find_my_messages(%{"max" => 1})
+      |> by_room_id(room)
+    assert result == expected
+  end
+
   test "post message" do
     mock_api = mock_of(ExWebexteams.Api)
-
     person = "me@here.com"
     msg = "this is my message"
 

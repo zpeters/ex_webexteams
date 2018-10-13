@@ -35,7 +35,7 @@ by adding `ex_webexteams` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_webexteams, "~> 0.1.1"}
+    {:ex_webexteams, "~> 0.1.2"}
   ]
 end
 ```
