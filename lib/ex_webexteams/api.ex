@@ -9,39 +9,11 @@ defmodule ExWebexteams.Api do
   @limit Application.get_env(:ex_webexteams, :limit_limit, 5)
 
   @doc """
-  Get the messages from a team room
-  """
-  def view_messages(roomId) do
-    get("/messages", %{"roomId" => roomId})
-  end
-
-  @doc """
-  Get a message
-  """
-  def view_message(messageId) do
-    get("/messages/#{messageId}")
-  end
-
-  @doc """
-  Send a message to a team room
-  """
-  def send_message(message, roomId) do
-    json = Poison.encode!(%{"roomId" => roomId, "text" => message})
-    post("/messages", json)
-  end
-
-  @doc """
-  Delete a message
-  """
-  def delete_message(messageId) do
-    delete("/messages/#{messageId}")
-  end
-
-  @doc """
   Get a resource (see webex api documentation)
 
   Example `get("/rooms")`
   """
+  # TODO create a spec for this
   def get(path) do
     ratelimit()
     url = generate_url(path)
@@ -69,7 +41,8 @@ defmodule ExWebexteams.Api do
 
   Example `post("/messages", json")`
   """
-  def post(path, body) do
+  # TODO create a spec for this
+  def post(body, path) do
     ratelimit()
     url = generate_url(path)
     headers = generate_headers()
