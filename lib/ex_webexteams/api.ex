@@ -9,11 +9,32 @@ defmodule ExWebexteams.Api do
   @limit Application.get_env(:ex_webexteams, :limit_limit, 5)
 
   @doc """
+  Get the messages from a team room
+  """
+  def view_messages(roomId) do
+    get("/messages", %{"roomId" => roomId})
+  end
+
+  @doc """
+  Get a message
+  """
+  def view_message(messageId) do
+    get("/messages/#{messageId}")
+  end
+
+  @doc """
   Send a message to a team room
   """
   def send_message(message, roomId) do
     json = Poison.encode!(%{"roomId" => roomId, "text" => message})
     post("/messages", json)
+  end
+
+  @doc """
+  Delete a message
+  """
+  def delete_message(messageId) do
+    delete("/messages/#{messageId}")
   end
 
   @doc """
@@ -31,6 +52,19 @@ defmodule ExWebexteams.Api do
   end
 
   @doc """
+  Get a resource with parameterized filters (see webex api documentation)
+
+  Example `get("/rooms", %{"teamId" => 1})`
+  """
+  def get(path, params) do
+    path
+      |> URI.parse()
+      |> Map.put(:query, URI.encode_query(params))
+      |> URI.to_string()
+      |> get()
+  end
+
+  @doc """
   Post a resource (see webex api documentation)
 
   Example `post("/messages", json")`
@@ -41,6 +75,20 @@ defmodule ExWebexteams.Api do
     headers = generate_headers()
     options = []
     response = HTTPoison.post!(url, body, headers, options)
+    response.body
+  end
+
+  @doc """
+  Delete a resource (see webex api documentation)
+
+  Example `delete("/messages/1")`
+  """
+  def delete(path) do
+    ratelimit()
+    url = generate_url(path)
+    headers = generate_headers()
+    options = []
+    response = HTTPoison.delete!(url, headers, options)
     response.body
   end
 
