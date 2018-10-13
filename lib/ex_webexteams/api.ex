@@ -1,6 +1,12 @@
 defmodule ExWebexteams.Api do
   @moduledoc """
   Interface to Webex Teams API through a rate limiter
+
+  ## Rate limiting
+  All calls are rate limied by default through `ex_rated`.  The defaults are as follows and can be configured via configs or environment variables (*see source*). By default we allow five requests every 10 seconds.
+   - `limit_bucket` = "webexteams-rate-limit"
+   - `limit_scale` = 10000 - timescale in milliseconds (10000 = 10 seconds )
+   - `limit_limit` = 5 - we can make 5 requests in `limit_scale` milliseconds
   """
 
   ### settings
@@ -8,40 +14,12 @@ defmodule ExWebexteams.Api do
   @scale Application.get_env(:ex_webexteams, :limit_scale, 10_000)
   @limit Application.get_env(:ex_webexteams, :limit_limit, 5)
 
-  @doc """
-  Get the messages from a team room
-  """
-  def view_messages(roomId) do
-    get("/messages", %{"roomId" => roomId})
-  end
+  ### types
+  @typep json :: String.t()
 
-  @doc """
-  Get a message
-  """
-  def view_message(messageId) do
-    get("/messages/#{messageId}")
-  end
-
-  @doc """
-  Send a message to a team room
-  """
-  def send_message(message, roomId) do
-    json = Poison.encode!(%{"roomId" => roomId, "text" => message})
-    post("/messages", json)
-  end
-
-  @doc """
-  Delete a message
-  """
-  def delete_message(messageId) do
-    delete("/messages/#{messageId}")
-  end
-
-  @doc """
-  Get a resource (see webex api documentation)
-
-  Example `get("/rooms")`
-  """
+  ### functions
+  @doc "http get request"
+  @spec get(String.t()) :: String.t()
   def get(path) do
     ratelimit()
     url = generate_url(path)
@@ -51,25 +29,19 @@ defmodule ExWebexteams.Api do
     response.body
   end
 
-  @doc """
-  Get a resource with parameterized filters (see webex api documentation)
-
-  Example `get("/rooms", %{"teamId" => 1})`
-  """
+  @doc "http get request with query parameters"
+  @spec get(String.t(), term) :: String.t()
   def get(path, params) do
     path
-      |> URI.parse()
-      |> Map.put(:query, URI.encode_query(params))
-      |> URI.to_string()
-      |> get()
+    |> URI.parse()
+    |> Map.put(:query, URI.encode_query(params))
+    |> URI.to_string()
+    |> get()
   end
 
-  @doc """
-  Post a resource (see webex api documentation)
-
-  Example `post("/messages", json")`
-  """
-  def post(path, body) do
+  @doc "http post request"
+  @spec post(json, String.t()) :: String.t()
+  def post(body, path) do
     ratelimit()
     url = generate_url(path)
     headers = generate_headers()
@@ -78,11 +50,8 @@ defmodule ExWebexteams.Api do
     response.body
   end
 
-  @doc """
-  Delete a resource (see webex api documentation)
-
-  Example `delete("/messages/1")`
-  """
+  @doc "http delete request"
+  @spec delete(String.t()) :: String.t()
   def delete(path) do
     ratelimit()
     url = generate_url(path)
@@ -97,6 +66,7 @@ defmodule ExWebexteams.Api do
     case ExRated.check_rate(@bucket, @scale, @limit) do
       {:ok, _} ->
         :ok
+
       {:error, _} ->
         {_, _, ms, _, _} = ExRated.inspect_bucket(@bucket, @scale, @limit)
         Process.sleep(ms)

@@ -4,7 +4,7 @@ defmodule ExWebexteams.MixProject do
   def project do
     [
       app: :ex_webexteams,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
@@ -14,12 +14,10 @@ defmodule ExWebexteams.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-
       docs: [
         main: "ExWebexteams",
         extras: ["README.md"]
       ],
-      
       deps: deps(),
       description: description(),
       package: package(),
@@ -56,6 +54,7 @@ defmodule ExWebexteams.MixProject do
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.3.1"},
       {:excoveralls, "~> 0.10.1", only: :test},
+      {:elixir_mock, "~> 0.2.8", only: :test},
       {:credo, "~> 0.10.2", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.19.1", only: :dev, runtime: false}
     ]
