@@ -1,6 +1,5 @@
 defmodule ExWebexteams.Api.Shortcuts do
   # TODO handle pagination
-  # TODO add functions for rest of API endpoints (view, etc)
   @moduledoc """
   Shortcuts to API calls
   """
