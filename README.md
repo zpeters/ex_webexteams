@@ -1,4 +1,6 @@
 # ExWebexteams
+[![Hex.pm](https://img.shields.io/hexpm/v/ex_webexteams.svg)](https://hex.pm/packages/ex_webexteams)
+[![Build Docs](https://img.shields.io/badge/hexdocs-release-blue.svg)](https://hexdocs.pm/ex_webexteams/ExWebexteams.html)
 [![Build Status](https://travis-ci.org/zpeters/ex_webexteams.svg?branch=master)](https://travis-ci.org/zpeters/ex_webexteams)
 [![Coverage Status](https://coveralls.io/repos/github/zpeters/ex_webexteams/badge.svg)](https://coveralls.io/github/zpeters/ex_webexteams)
 
