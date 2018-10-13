@@ -14,12 +14,10 @@ defmodule ExWebexteams.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-
       docs: [
         main: "ExWebexteams",
         extras: ["README.md"]
       ],
-      
       deps: deps(),
       description: description(),
       package: package(),

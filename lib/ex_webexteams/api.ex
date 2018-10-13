@@ -29,10 +29,10 @@ defmodule ExWebexteams.Api do
   """
   def get(path, params) do
     path
-      |> URI.parse()
-      |> Map.put(:query, URI.encode_query(params))
-      |> URI.to_string()
-      |> get()
+    |> URI.parse()
+    |> Map.put(:query, URI.encode_query(params))
+    |> URI.to_string()
+    |> get()
   end
 
   @doc """
@@ -68,6 +68,7 @@ defmodule ExWebexteams.Api do
     case ExRated.check_rate(@bucket, @scale, @limit) do
       {:ok, _} ->
         :ok
+
       {:error, _} ->
         {_, _, ms, _, _} = ExRated.inspect_bucket(@bucket, @scale, @limit)
         Process.sleep(ms)

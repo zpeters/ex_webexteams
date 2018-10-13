@@ -63,14 +63,17 @@ defmodule ExWebexteamsShortcutsTest do
     person = "me@here.com"
     msg = "this is my message"
     expected = %{"toPersonEmail" => person, "text" => msg}
-    result = msg
-    |> send_message
-    |> to_person_email(person)
+
+    result =
+      msg
+      |> send_message
+      |> to_person_email(person)
+
     assert result == expected
   end
 
   test "post message" do
-    mock_api = mock_of ExWebexteams.Api
+    mock_api = mock_of(ExWebexteams.Api)
 
     person = "me@here.com"
     msg = "this is my message"
@@ -80,7 +83,11 @@ defmodule ExWebexteamsShortcutsTest do
     |> to_person_email(person)
     |> post_message(mock_api)
 
-    assert_called mock_api.post("{\"toPersonEmail\":\"me@here.com\",\"text\":\"this is my message\"}", "/messages")
+    assert_called(
+      mock_api.post(
+        "{\"toPersonEmail\":\"me@here.com\",\"text\":\"this is my message\"}",
+        "/messages"
+      )
+    )
   end
-
 end
