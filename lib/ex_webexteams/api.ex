@@ -9,14 +9,6 @@ defmodule ExWebexteams.Api do
   @limit Application.get_env(:ex_webexteams, :limit_limit, 5)
 
   @doc """
-  Send a message to a team room
-  """
-  def send_message(message, roomId) do
-    json = Poison.encode!(%{"roomId" => roomId, "text" => message})
-    post("/messages", json)
-  end
-
-  @doc """
   Get a resource (see webex api documentation)
 
   Example `get("/rooms")`
