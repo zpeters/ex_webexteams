@@ -15,11 +15,13 @@ defmodule ExWebexteams.Api do
   @limit Application.get_env(:ex_webexteams, :limit_limit, 5)
 
   ### types
-  @typep json :: String.t()
+  @type json :: String.t()
+  @type response :: %{}
+  @type error :: %{}
 
   ### functions
   @doc "http get request"
-  @spec get(String.t()) :: String.t()
+  @spec get(String.t()) :: response | error
   def get(path) do
     ratelimit()
     url = generate_url(path)
@@ -27,10 +29,11 @@ defmodule ExWebexteams.Api do
     options = []
     response = HTTPoison.get!(url, headers, options)
     response.body
+    |> Poison.decode!
   end
 
   @doc "http get request with query parameters"
-  @spec get(String.t(), term) :: String.t()
+  @spec get(String.t(), term) :: response | error
   def get(path, params) do
     path
     |> URI.parse()
@@ -40,7 +43,7 @@ defmodule ExWebexteams.Api do
   end
 
   @doc "http post request"
-  @spec post(json, String.t()) :: String.t()
+  @spec post(json, String.t()) :: response | error
   def post(body, path) do
     ratelimit()
     url = generate_url(path)
@@ -48,10 +51,11 @@ defmodule ExWebexteams.Api do
     options = []
     response = HTTPoison.post!(url, body, headers, options)
     response.body
+    |> Poison.decode!
   end
 
   @doc "http delete request"
-  @spec delete(String.t()) :: String.t()
+  @spec delete(String.t()) :: response | error
   def delete(path) do
     ratelimit()
     url = generate_url(path)
@@ -59,6 +63,7 @@ defmodule ExWebexteams.Api do
     options = []
     response = HTTPoison.delete!(url, headers, options)
     response.body
+    |> Poison.decode!
   end
 
   ### Internal
