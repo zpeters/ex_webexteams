@@ -29,7 +29,6 @@ defmodule ExWebexteams.Api do
     options = []
     response = HTTPoison.get!(url, headers, options)
     response.body
-    |> Poison.decode!
   end
 
   @doc "http get request with query parameters"
@@ -51,7 +50,6 @@ defmodule ExWebexteams.Api do
     options = []
     response = HTTPoison.post!(url, body, headers, options)
     response.body
-    |> Poison.decode!
   end
 
   @doc "http delete request"
@@ -63,7 +61,6 @@ defmodule ExWebexteams.Api do
     options = []
     response = HTTPoison.delete!(url, headers, options)
     response.body
-    |> Poison.decode!
   end
 
   ### Internal
