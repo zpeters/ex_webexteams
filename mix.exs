@@ -50,7 +50,7 @@ defmodule ExWebexteams.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_rated, "~> 1.3.2"},
+      {:ex_rated, "~> 2.0.0"},
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.6.0"},
       {:excoveralls, "~> 0.12.0", only: :test},
