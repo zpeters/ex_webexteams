@@ -52,7 +52,7 @@ defmodule ExWebexteams.MixProject do
     [
       {:ex_rated, "~> 2.0.0"},
       {:poison, "~> 4.0.1"},
-      {:httpoison, "~> 1.7.0"},
+      {:httpoison, "~> 1.8.0"},
       {:excoveralls, "~> 0.13.1", only: :test},
       {:elixir_mock, "~> 0.2.8", only: :test},
       {:credo, "~> 1.5.1", only: [:dev, :test], runtime: false},
