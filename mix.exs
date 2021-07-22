@@ -51,7 +51,7 @@ defmodule ExWebexteams.MixProject do
   defp deps do
     [
       {:ex_rated, "~> 2.0.0"},
-      {:poison, "~> 4.0.1"},
+      {:poison, "~> 5.0.0"},
       {:httpoison, "~> 1.8.0"},
       {:excoveralls, "~> 0.14.0", only: :test},
       {:elixir_mock, "~> 0.2.8", only: :test},
